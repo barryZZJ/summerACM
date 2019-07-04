@@ -9,9 +9,19 @@ void init(int n) {
 	}
 }
 
+// int find(int x) {
+// 	if (p[x] == x) return x;
+// 	return p[x] = find(p[x]); //路径压缩，当前节点的根一定是父节点的根
+// }
+
+//非递归，防止爆栈
 int find(int x) {
 	if (p[x] == x) return x;
-	return p[x] = find(p[x]); //路径压缩，当前节点的根一定是父节点的根
+	int rootx = p[x];
+	while (rootx != p[rootx]) {
+		rootx = p[rootx];
+	}
+	return p[x] = rootx;
 }
 
 bool same(int x, int y) {
