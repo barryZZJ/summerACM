@@ -10,6 +10,8 @@
 using namespace std;
 
 
+const int MAXN = 100;//总共点的个数
+
 map<char, map<char, int>> graph;
 map<char, int> d;
 
@@ -50,18 +52,19 @@ int main() {
 	d['E'] = INF;
 	d['F'] = INF;
 
-	fill(seen + 1, seen + MAXN + 1, false);
+	int n = 6;
+	fill(seen + 1, seen + n + 1, false);
 
 	pq.push('A');
 	while (pq.size()) {
-		char n = pq.top(); pq.pop();
-		seen[n] = true;
-		for (map<char, int>::iterator it = graph[n].begin(); it != graph[n].end(); it++) {
+		char tn = pq.top(); pq.pop();
+		seen[tn] = true;
+		for (map<char, int>::iterator it = graph[tn].begin(); it != graph[tn].end(); it++) {
 			//it为邻接点
 			char adj = it->first; //邻接点编号
 			int distance = it->second;
 			if (!seen[adj]) {
-				d[adj] = min(d[adj], d[n] + distance);
+				d[adj] = min(d[adj], d[tn] + distance);
 				pq.push(adj);
 			}
 

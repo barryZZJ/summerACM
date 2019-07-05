@@ -12,7 +12,7 @@
 using namespace std;
 
 
-const int MAXN = 6;//总共点的个数
+const int MAXN = 100;//总共点的个数范围
 
 struct edge
 {
@@ -21,9 +21,9 @@ struct edge
 	edge(int _to, int _d) :to(_to), dist(_d) {};
 };
 
-vector<edge> g[MAXN + 1];
+vector<edge> g[MAXN];//第i个点的相连边
 
-int d[MAXN + 1];
+int d[MAXN];
 
 struct cmp
 {
@@ -33,7 +33,7 @@ struct cmp
 };
 
 
-bool seen[MAXN + 1];
+bool seen[MAXN];
 const int INF = 10000;
 
 priority_queue<int, vector<int>, cmp> pq;
@@ -48,29 +48,29 @@ int main() {
 	g[6].push_back(edge(4, 6));
 
 	int start = 1;
-	for (int i = 1;i <= MAXN;i++) {
+	int n = 6;
+	for (int i = 1;i <= n;i++) {
 		if (i == start) d[i] = 0;
-		else d[i] = INF;
+		else d[i] = n;
 	}
 
-	fill(seen + 1, seen + MAXN + 1, false);
+	fill(seen + 1, seen + n + 1, false);
 
 	pq.push(start);
 	while (pq.size()) {
-		int n = pq.top(); pq.pop();
-		seen[n] = true;
-		for (int i = 0;i < g[n].size();i++) {
-			//g[n][i]当前点相连边 g[n][i].to为邻接点
-			int adj = g[n][i].to;
-			int distance = g[n][i].dist;
+		int tn = pq.top(); pq.pop();
+		seen[tn] = true;
+		for (int i = 0;i < g[tn].size();i++) {
+			//g[tn][i]当前点相连边 g[tn][i].to为邻接点
+			int adj = g[tn][i].to;
+			int distance = g[tn][i].dist;
 			if (!seen[adj]) {
-				d[adj] = min(d[adj], d[n] + distance);
+				d[adj] = min(d[adj], d[tn] + distance);
 				pq.push(adj);
 			}
 		}
-
 	}
-	for (int i = 1;i <= MAXN;i++) {
+	for (int i = 1;i <= n;i++) {
 		cout << i << " : " << d[i] << endl;
 	}
 
