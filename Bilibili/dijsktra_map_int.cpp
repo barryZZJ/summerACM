@@ -1,3 +1,4 @@
+//也可以不存d[]，存每一个点的父节点，求d的时候回溯
 //点编号为数字， 用map存邻接矩阵
 #include <iostream>
 #include <stdio.h>
@@ -51,7 +52,7 @@ int main() {
 		else d[i] = INF;
 	}
 
-	fill(seen, seen + MAXN, false);
+	fill(seen + 1, seen + MAXN + 1, false);
 
 	pq.push(start);
 	while (pq.size()) {
@@ -62,7 +63,7 @@ int main() {
 			int adj = it->first; //邻接点编号
 			int distance = it->second;
 			if (!seen[adj]) {
-				d[adj] = d[n] + distance;
+				d[adj] = min(d[adj], d[n] + distance);
 				pq.push(adj);
 			}
 

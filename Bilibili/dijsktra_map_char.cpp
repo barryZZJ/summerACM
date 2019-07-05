@@ -1,4 +1,4 @@
-
+//也可以不存d[]，存每一个点的父节点，求d的时候回溯
 #include <iostream>
 #include <stdio.h>
 #include <algorithm>
@@ -50,6 +50,8 @@ int main() {
 	d['E'] = INF;
 	d['F'] = INF;
 
+	fill(seen + 1, seen + MAXN + 1, false);
+
 	pq.push('A');
 	while (pq.size()) {
 		char n = pq.top(); pq.pop();
@@ -59,7 +61,7 @@ int main() {
 			char adj = it->first; //邻接点编号
 			int distance = it->second;
 			if (!seen[adj]) {
-				d[adj] = d[n] + distance;
+				d[adj] = min(d[adj], d[n] + distance);
 				pq.push(adj);
 			}
 
