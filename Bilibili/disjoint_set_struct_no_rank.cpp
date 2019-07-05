@@ -1,13 +1,13 @@
 //不带rank
 
-const int MAXN = 10;
+const int MAXV = 10;
 
 struct Disset {
 
-	int p[MAXN];
+	int p[MAXV];
 	//默认一开始所有点都是独立的
-	void init(int n) {
-		for (int i = 0; i < n; i++) {
+	void init(int v) {
+		for (int i = 0; i <= v; i++) {
 			p[i] = i;
 		}
 	}

@@ -1,13 +1,13 @@
 //带rank
-const int MAXN = 10;
-int p[MAXN];
-int rank[MAXN];
+const int MAXV = 10;
+int p[MAXV];
+int rank[MAXV];
 
 //默认一开始所有点都是独立的
-void init(int n) {
-	for (int i = 0; i < n; i++){
+void init(int v) {
+	for (int i = 0; i <= v; i++){
 		p[i] = i;
-		rank[MAXN] = 0;
+		rank[MAXV] = 0;
 	}
 }
 
