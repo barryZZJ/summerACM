@@ -1,3 +1,4 @@
+//不连通的条件：e != v-1
 #include <iostream>
 #include <stdio.h>
 #include <algorithm>
