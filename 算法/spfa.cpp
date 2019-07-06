@@ -76,6 +76,7 @@ bool negative_spfa(int v, int start) {
 
 //不判断负环的spfa
 void spfa(int start) {
+	d[start] = 0;
 	q.push(start);
 
 	while (q.size()) {
