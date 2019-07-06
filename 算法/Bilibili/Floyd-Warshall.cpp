@@ -7,7 +7,7 @@
 using namespace std;
 
 const int MAXV = 6;
-const int INF = 99999999;
+const int INF = 99999999;//注意嗷不能用INT_MAX否则d[i][k] + d[k][j]一个INF加另一个数就变成了负数。。
 int d[MAXV + 1][MAXV + 1];
 
 
