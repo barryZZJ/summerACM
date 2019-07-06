@@ -38,7 +38,7 @@ const int MAXV = 1005;//点数
 vector<edge> g[MAXV];//第i个点的相连边
 vector<edge>::iterator it;
 int d[MAXV];
-const int INF = INT_MAX;
+const int INF = 999999999;//INT_MAX会爆
 queue<int> q;
 bool inq[MAXV];//是否在队列中
 int show[MAXV];//点i出现的次数，超过n有负环
@@ -50,6 +50,7 @@ void addEdge(const int &f, const int &t, const int &cost) {
 //判断负环的spfa
 bool negative_spfa(int v, int start) {
 
+	d[start] = 0;
 	q.push(start);
 
 	while (q.size()) {
