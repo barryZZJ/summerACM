@@ -34,9 +34,13 @@ struct cmp
 
 
 bool seen[MAXN];
-const int INF = 10000;
+const int INF = 100000;
 
 priority_queue<int, vector<int>, cmp> pq;
+
+void addEdge(const int &f, const int &t, const int &cost) {
+	g[f].push_back(edge(t, cost));
+}
 
 int main() {
 
@@ -47,12 +51,10 @@ int main() {
 	g[5].push_back(edge(3, 8));	g[5].push_back(edge(4, 3));
 	g[6].push_back(edge(4, 6));
 
-	int start = 1;
+	int start = 2;
 	int n = 6;
-	for (int i = 1;i <= n;i++) {
-		if (i == start) d[i] = 0;
-		else d[i] = n;
-	}
+	fill(d + 1, d + 1 + n, INF);
+	d[start] = 0;
 
 	fill(seen + 1, seen + n + 1, false);
 
@@ -71,7 +73,7 @@ int main() {
 		}
 	}
 	for (int i = 1;i <= n;i++) {
-		cout << i << " : " << d[i] << endl;
+		cout << start << "->" << i << " : " << d[i] << endl;
 	}
 
 }

@@ -50,10 +50,8 @@ int main() {
 	int start = 1;
 	int n = 6;
 
-	for(int i=1;i<=n;i++){
-		if(i==start) d[i] = 0;
-		else d[i] = INF;
-	}
+	fill(d + 1, d + 1 + n, INF);
+	d[start] = 0;
 
 	fill(seen + 1, seen + n + 1, false);
 
@@ -61,10 +59,10 @@ int main() {
 	while (pq.size()) {
 		int tn = pq.top(); pq.pop();
 		seen[tn] = true;
-		for (int i = 0;i < g[tn].size();i++) {
+		for (map<int, int>::iterator it = graph[tn].begin(); it != graph[tn].end(); it++) {
 			//g[tn][i]当前点相连边 g[tn][i].to为邻接点
-			int adj = g[tn][i].to;
-			int distance = g[tn][i].dist;
+			int adj = it->first;
+			int distance = it->second;
 			if (!seen[adj]) {
 				d[adj] = min(d[adj], d[tn] + distance);
 				pq.push(adj);

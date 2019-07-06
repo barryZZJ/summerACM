@@ -53,7 +53,7 @@ int main() {
 	d['F'] = INF;
 
 	int n = 6;
-	fill(seen + 1, seen + n + 1, false);
+	seen['A'] = seen['B'] = seen['C'] = seen['D'] = seen['F'] = false;
 
 	pq.push('A');
 	while (pq.size()) {

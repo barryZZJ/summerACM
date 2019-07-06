@@ -65,6 +65,10 @@ int kruskal(int v) {
 	return res;
 }
 
+void addEdge(const int &f, const int &t, const int &cost) {
+	edges.push_back(edge(f, t, cost));
+}
+
 int main() {
 	int v;//顶点数
 	//int e;//边数
