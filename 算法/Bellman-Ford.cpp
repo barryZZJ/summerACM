@@ -1,6 +1,8 @@
+//主要找单向边
 //从起点到第i个点的最短距离di = min{d(j) + w(i,j) | j与i相邻}
 // (所有（到点i相邻的点（j）的最小距离 + 这两个点的距离）中的最小值）
-//实现方法：存边的to, distance，初始化最短路径数组d[]为INF。按点遍历，每个点遍历一次所有的相连边。 d(i) 就是mint(d[e.to] + e.distance)
+//实现方法：存边的to, distance，初始化最短路径数组d[]为INF，，d[起点]=0。
+//按点遍历，每个点遍历一次所有的相连边。 d(i) 就是mint(d[e.to] + e.distance)
 #include <iostream>
 #include <stdio.h>
 #include <algorithm>
@@ -73,6 +75,7 @@ void addEdge(const int &f, const int &t, const int &cost) {
 
 int main() {
 	////输入数据
+	//无负环
 	//int v = 6;
 	//
 	//g[1].push_back(edge(2, 5));	g[1].push_back(edge(3, 1));
@@ -82,15 +85,15 @@ int main() {
 	//g[5].push_back(edge(3, 8));	g[5].push_back(edge(4, 3));
 	//g[6].push_back(edge(4, 6));
 	
+	//有负环
 	int v = 4;
 	addEdge(1, 2, 1); //addEdge(1, 4, -3);
 	addEdge(2, 3, 1); //addEdge(2, 1, 1);
 	addEdge(3, 4, 1); //addEdge(3, 2, 1);
 	addEdge(4, 1, -4); //addEdge(4, 3, 1);
-
-	//初始化
 	
 	for (int start = 1; start <= v; start++) {
+		//初始化
 		fill(d + 1, d + 1 + v, INF);
 		d[start] = 0;//起点
 
