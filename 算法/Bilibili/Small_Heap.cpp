@@ -31,7 +31,7 @@ public:
 		heap.push_back(x);
 		n++;
 		int i = n - 1;
-		if(i>=1)
+		if(n>1)
 			heapify(p(i));
 	}
 
