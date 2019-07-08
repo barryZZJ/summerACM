@@ -31,8 +31,12 @@ public:
 		heap.push_back(x);
 		n++;
 		int i = n - 1;
-		if(n>1)
-			heapify(p(i));
+		//确定x的位置i
+		while (i > 0 && heap[p(i)] >= x ) {
+			heap[i] = heap[p(i)];
+			i = p(i);
+		}
+		heap[i] = x;
 	}
 
 	int pop() {
