@@ -1,6 +1,0 @@
-2.1 搜索。DFS、BFS
-2.2 贪心
-2.3 动态规划DP（记忆化搜索）
-2.4 数据结构。优先队列（堆）、二叉搜索树、并查集
-2.5 图。二分图、最短路（Bellman-Ford、Dijkstra、Floyd-Warshall）、最小生成树（Prim、Kruskal）
-2.6 数论
