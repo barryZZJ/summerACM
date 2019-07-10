@@ -1,0 +1,20 @@
+B. Sumsets
+
+Farmer John commanded his cows to search for different sets of numbers that sum to a given number. The cows use only numbers that are an integer power of 2. Here are the possible sets of numbers that sum to 7: 
+
+1) 1+1+1+1+1+1+1 
+2) 1+1+1+1+1+2 
+3) 1+1+1+2+2 
+4) 1+1+1+4 
+5) 1+2+2+2 
+6) 1+2+4 
+
+Help FJ count all possible representations for a given integer N (1 <= N <= 1,000,000). 
+Input
+A single line with a single integer, N.
+Output
+The number of ways to represent N as the indicated sum. Due to the potential huge size of this number, print only last 9 digits (in base 10 representation).
+Sample Input
+7
+Sample Output
+6
