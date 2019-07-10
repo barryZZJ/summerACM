@@ -16,6 +16,10 @@ using namespace std;
 int main() {
 	int n,m;
 	int d[MAXN][MAXM];
+	
+	dp[0][0] = 1;
+    for(int i = 1; i <= m; i++) dp[0][i] = 1;
+
 	for(int i = 1; i<=n; i++){
 		for(int j = 1; j<=m; j++){
 			if(i>=j) d[i][j] = d[i-1][j-1] + d[i-j][j];
