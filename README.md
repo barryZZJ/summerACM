@@ -1,6 +1,6 @@
 ﻿# summerACM
-小学期代码
-http://acm.cqu.edu.cn
+内网：http://acm.cqu.edu.cn
+外网：https://rp-cquoj.cyyself.name:4343/
 
 ## 记录
 |章节|完成情况|知识点|
