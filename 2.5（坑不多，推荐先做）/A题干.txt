@@ -1,5 +1,7 @@
 A. Six Degrees of Cowvin Bacon
 
+一起做过电影的连一条边距离为1，没有做过电影的距离为两点间最小距离。求所有牛里到其他牛的平均距离的最小值*100
+
 The cows have been making movies lately, so they are ready to play a variant of the famous game "Six Degrees of Kevin Bacon". 
 
 The game works like this: each cow is considered to be zero degrees of separation (degrees) away from herself. If two distinct cows have been in a movie together, each is considered to be one 'degree' away from the other. If a two cows have never worked together but have both worked with a third cow, they are considered to be two 'degrees' away from each other (counted as: one degree to the cow they've worked with and one more to the other cow). This scales to the general case. 
