@@ -1,3 +1,4 @@
+//求单源最短路，遍历每个边一次，每个点可遇到多次
 //也可以不存d[]，存每一个点的父节点，求d的时候回溯
 //点编号为数字， 用edge结构体存边
 #include <iostream>
@@ -8,6 +9,7 @@
 #include <queue>
 #include <vector>
 #include <map>
+#include <climits>
 
 using namespace std;
 
@@ -34,7 +36,7 @@ struct cmp
 
 
 bool seen[MAXN];
-const int INF = 100000;
+const int INF = INT_MAX;
 
 priority_queue<int, vector<int>, cmp> pq;
 
@@ -51,7 +53,7 @@ int main() {
 	g[5].push_back(edge(3, 8));	g[5].push_back(edge(4, 3));
 	g[6].push_back(edge(4, 6));
 
-	int start = 2;
+	int start = 1 ;
 	int n = 6;
 	fill(d + 1, d + 1 + n, INF);
 	d[start] = 0;
