@@ -2,6 +2,9 @@
 内网：http://acm.cqu.edu.cn
 外网：https://rp-cquoj.cyyself.name:4343/
 
+## 笔记
+https://blog.csdn.net/zhouzejun1/article/details/94419114
+
 ## 记录
 |章节|完成情况|知识点|
 |:---:|:---:|:---|
