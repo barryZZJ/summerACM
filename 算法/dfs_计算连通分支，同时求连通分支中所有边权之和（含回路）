@@ -1,0 +1,90 @@
+// 1034 Head of a Gang
+// https://pintia.cn/problem-sets/994805342720868352/problems/994805456881434624
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+map<string, map<string, int>> g;
+map<string, int> weight;
+
+map<string, bool> seen;
+
+int pers_cnt, tot_wght;
+string head;
+
+void dfs(string p){
+    seen[p] = true;
+    pers_cnt++;
+    
+    if (weight[p] > weight[head])
+        head = p;
+
+    for(auto it2 = g[p].begin(); it2 != g[p].end(); it2++){
+        string adj = it2->first;
+        int d = it2->second;
+        if(d != 0){
+            tot_wght += d;
+            g[p][adj] = g[adj][p] = 0;
+            if(!seen[adj])
+                dfs(adj);
+        }
+
+    }
+}
+
+int main(){
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    #endif
+
+    int n, k;
+    scanf("%d%d", &n, &k);
+
+    for (int i = 0; i < n; i++){
+        string a, b;
+        int d;
+        cin >> a >> b;
+        scanf("%d", &d);
+        g[a][b] += d;
+        g[b][a] += d;
+        weight[a] += d;
+        weight[b] += d;
+        seen[a] = false;
+        seen[b] = false;
+    }
+    int gang_cnt = 0;
+    vector<string> res;
+    for(auto it = g.begin(); it != g.end(); it++){
+        string a = it->first;
+
+        if (!seen[a]){
+            pers_cnt = 0;
+            tot_wght = 0;
+            head = a;
+            dfs(a);
+
+            if(tot_wght > k && pers_cnt > 2){
+                gang_cnt++;
+                res.push_back(head + " " + to_string(pers_cnt));
+            }
+
+                printf("head:");
+                cout << head;
+                printf(" tot=%d pers=%d\n", tot_wght, pers_cnt);
+        }
+    }
+
+    printf("%d", gang_cnt);
+    if(res.size()){
+        cout << '\n' << res[0];
+        for (int i = 1; i < res.size(); i++){
+            cout << '\n'
+                << res[i];
+        }
+    }
+
+
+    return 0;
+}
