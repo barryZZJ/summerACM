@@ -30,8 +30,9 @@ int prim() {
     int ans = 0;
     memset(vis, 0, sizeof(vis));
     vis[0] = 1;
-  
-    for (int i=1; i<n; ++i) { // 循环n-1次，找剩下的n-1个点。
+    
+    int r = n-1;
+    while (r--) { // 循环n-1次，找剩下的n-1个点。
         int minp = -1; // V-S中最近的点
         int mind = inf; // 记录最近的距离
         for (int j=0; j<n; ++j) { // 循环找当前剩下的点中 距离最小生成树点集距离最短的点。
