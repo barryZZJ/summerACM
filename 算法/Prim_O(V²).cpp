@@ -32,25 +32,26 @@ int prim() {
     vis[0] = 1;
   
     for (int i=1; i<n; ++i) { // 循环n-1次，找剩下的n-1个点。
-        int k = -1, mindis = inf;
+        int minp = -1; // V-S中最近的点
+        int mind = inf; // 记录最近的距离
         for (int j=0; j<n; ++j) { // 循环找当前剩下的点中 距离最小生成树点集距离最短的点。
-            if (!vis[j] && low[j] < mindis) {
-                mindis = low[j];
-                k = j;
+            if (!vis[j] && low[j] < mind) {
+                mind = low[j];
+                minp = j;
             }
         }
   
-         if (k == -1) return -1;
-         vis[k] = 1; // 加入最小生成树点集
-         ans += mindis;
+         if (minp == -1) return -1;
+         vis[minp] = 1; // 加入最小生成树点集
+         ans += mind;
   
          for (int j=0; j<n; ++j) { // 更新没加入最小生成树的点中 距离是否会缩短。
             /*if (!vis[j] && low[j] > low[k] + g[k][j]) {
                     low[j] = low[k] + g[k][j];
             }*/
   
-             if (!vis[j] && low[j] > g[k][j]) { // 上面的if是错的。low数组存储的距离是当前点到生成树中所有点距离最小的的点。
-                    low[j] = g[k][j]; // 因为这个点加入最小生成树集合中，可以和其中任意一个点连一条边。
+             if (!vis[j] && low[j] > g[minp][j]) { // 上面的if是错的。low数组存储的距离是当前点到生成树中所有点距离最小的的点。
+                    low[j] = g[minp][j]; // 因为这个点加入最小生成树集合中，可以和其中任意一个点连一条边。
             }
         }
     }
