@@ -23,6 +23,12 @@ int vis[210]; // 表示该点是否已经加入最小生成树中
 int n;
   
 int prim() {
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            g[i][j] = inf;
+        }
+    }
+  
     for (int i=0; i<n; ++i) {
         low[i] = g[0][i];
     }
@@ -32,7 +38,7 @@ int prim() {
     vis[0] = 1;
     
     int r = n-1;
-    while (r--) { // 循环n-1次，找剩下的n-1个点。
+    while (r--) { // 每次加一个点，循环n-1次加完n-1个点。
         int minp = -1; // V-S中最近的点
         int mind = inf; // 记录最近的距离
         for (int j=0; j<n; ++j) { // 循环找当前剩下的点中 距离最小生成树点集距离最短的点。
