@@ -1,0 +1,93 @@
+// 回溯路径: 
+// priority_queue 存node而不是int，用来记录该点的前一个点，配合数组pre、DFS用于回溯路径。
+// 同时用单独的数组cost记录从起点到该点（走最短路）的总cost（跟distance不同），当distance相同时cost小的优先。
+// 1030 Travel Plan
+// https://pintia.cn/problem-sets/994805342720868352/problems/994805464397627392
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+const int INF = 99999999;
+
+struct edge{
+    int to, di, co;
+    edge(){}
+    edge(int _to, int distance, int cost){
+        to = _to;
+        di = distance;
+        co = cost;
+    }
+};
+struct node{
+    int fr, id;
+    node(int from, int _id){
+        fr = from;
+        id = _id;
+    }
+};
+
+int d[505];
+int cost[505];
+int pre[505];
+vector<edge> g[505];
+bool seen[505];
+
+struct cmp{
+    bool operator ()(node a, node b){
+        return d[a.id] != d[b.id] ? d[a.id] > d[b.id] : cost[a.id] > cost[b.id];
+    }
+};
+
+priority_queue<node, vector<node>, cmp> pq;
+
+void dfs(int x){
+    if (pre[x] != x)
+        dfs(pre[x]);
+    printf("%d ", x);
+}
+
+int main(){
+    #ifndef ONLINE_JUDGE
+    freopen("input.txt","r", stdin);
+    #endif
+    int n, m, s, t;
+    scanf("%d%d%d%d", &n, &m, &s, &t);
+    for (int i = 0; i < m; i++){
+        int a, b, d, c;
+        scanf("%d%d%d%d", &a, &b, &d, &c);
+        g[a].push_back(edge(b, d, c));
+        g[b].push_back(edge(a, d, c));
+    }
+
+    fill(d, d + n, INF);
+    fill(cost, cost + n, INF);
+    d[s] = 0;
+    cost[s] = 0;
+    pre[s] = s;
+
+    pq.push(node(s, s));
+
+    while(pq.size()){
+        auto n = pq.top();
+        pq.pop();
+        seen[n.id] = true;
+        pre[n.id] = n.fr;
+        for (auto it = g[n.id].begin(); it != g[n.id].end(); it++){
+            auto &e = *it;
+            if(!seen[e.to]){
+                if (d[n.id] + e.di < d[e.to]){
+                    d[e.to] = d[n.id] + e.di;
+                    cost[e.to] = cost[n.id] + e.co;
+                    pq.push(node(n.id, e.to));
+                }else if(d[n.id] + e.di == d[e.to] && cost[n.id] + e.co < cost[e.to]){
+                    cost[e.to] = cost[n.id] + e.co;
+                    pq.push(node(n.id, e.to));
+                }
+            }
+        }
+    }
+    dfs(t);
+    printf("%d %d", d[t], cost[t]);
+    return 0;
+}

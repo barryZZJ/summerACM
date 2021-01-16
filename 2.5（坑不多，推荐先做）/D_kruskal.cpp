@@ -1,15 +1,17 @@
-//不连通的条件：e != v-1
 #include <iostream>
 #include <stdio.h>
 #include <algorithm>
 #include <cstring>
-#include <cmath>
+#include <climits>
+#include <queue>
 #include <vector>
 
 using namespace std;
 
-//并查集用来找环
-const int MAXV = 10005;
+//最小生成树问题，Kruskal
+//注意输入，一行超过80个字符会换行
+
+const int MAXV = 105;
 int p[MAXV];
 
 //默认一开始所有点都是独立的
@@ -28,16 +30,13 @@ int find(int x) {
 	return p[x] = rootx;
 }
 
-bool same(int x, int y) {
-	return find(x) == find(y);
-}
-
 bool unite(int x, int y) {
 	x = find(x); y = find(y);
 	if (x == y) return false;
 	p[x] = y;
 	return true;
 }
+
 
 struct edge
 {
@@ -47,8 +46,12 @@ struct edge
 
 	edge(int f = 0, int t = 0, int c = 0) :from(f), to(t), cost(c) {};
 
-};//edges[MAXE];
+};
+
 vector<edge> edges;
+void addEdge(const int &f, const int &t, const int &cost) {
+	edges.push_back(edge(f, t, cost));
+}
 
 bool cmp(const edge &e1, const edge &e2) {
 	return e1.cost < e2.cost;
@@ -66,31 +69,26 @@ int kruskal(int v) {
 	return res;
 }
 
-void addEdge(const int &f, const int &t, const int &cost) {
-	edges.push_back(edge(f, t, cost));
-}
 
 int main() {
-	int v;//顶点数
-	//int e;//边数
 
-	//初始化边数组----
-	v = 5;
-	//单向边就行
-	edges.push_back(edge(1, 2, 1));
-	edges.push_back(edge(1, 3, 2));
-	edges.push_back(edge(1, 5, 4));
-	edges.push_back(edge(2, 3, 1));
-	edges.push_back(edge(3, 5, 6));
-	edges.push_back(edge(2, 4, 2));
-	edges.push_back(edge(3, 4, 3));
-	edges.push_back(edge(4, 5, 5));
-	//----
-    
-	int res = kruskal(v+5);
+	int v;
+	while (cin >> v) {
+		edges.clear();
+		for (int i = 1;i <= v;i++) {
+			for (int j = 1;j <= v;j++) {
+				int c;
+				scanf("%d", &c);
+				if (i != j) {
+					addEdge(i, j, c);
+					addEdge(j, i, c);
+				}
+			}
+		}
 
-
-	cout << "最小生成树权重=" << res;
-
+		cout << kruskal(v)<<endl;
+		
+		
+	}
 	return 0;
 }
